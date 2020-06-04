@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -33,13 +32,13 @@ public class Ticket {
             joinColumns = @JoinColumn(name = "ticket_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private final Set<User> users = new HashSet<>();
+    private Set<User> users;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime boughtAt;
-    private int row;
+    private int tier;
     private int seat;
     private double price;
 }
