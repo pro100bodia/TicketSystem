@@ -5,20 +5,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class TicketModel {
+public class PlaceModel {
     private Long id;
-    private LocalDateTime boughtAt;
-    private int tier;
-    private int seat;
-    private double price;
+    private String title;
+    private String country;
+    private String city;
+    private String state;
+    private String street;
+    private String building;
+    private String placesNum;
 
-    private Set<UserModel> users;
     private Set<EventModel> events;
 }

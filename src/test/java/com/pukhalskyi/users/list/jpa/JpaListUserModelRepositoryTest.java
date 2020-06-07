@@ -48,10 +48,10 @@ public class JpaListUserModelRepositoryTest {
 
     @BeforeClass
     public static void initUsers() {
-        Ticket ticket1 = new Ticket(1L, date1, 1, 1, 10.0, null);
-        Ticket ticket2 = new Ticket(2L, date1, 2, 2, 20.0, null);
-        Ticket ticket3 = new Ticket(3L, date1, 3, 3, 30.0, null);
-        Ticket ticket4 = new Ticket(4L, date1, 4, 4, 40.0, null);
+        Ticket ticket1 = new Ticket(1L, date1, 1, 1, 10.0, null, null);
+        Ticket ticket2 = new Ticket(2L, date1, 2, 2, 20.0, null, null);
+        Ticket ticket3 = new Ticket(3L, date1, 3, 3, 30.0, null, null);
+        Ticket ticket4 = new Ticket(4L, date1, 4, 4, 40.0, null, null);
 
         Set<Ticket> tickets1 = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(ticket1, ticket2)));
         Set<Ticket> tickets2 = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(ticket3)));
@@ -68,10 +68,10 @@ public class JpaListUserModelRepositoryTest {
 
     @BeforeClass
     public static void initUserModels() {
-        TicketModel ticket1 = new TicketModel(1L, date1, 1, 1, 10.0, null);
-        TicketModel ticket2 = new TicketModel(2L, date1, 2, 2, 20.0, null);
-        TicketModel ticket3 = new TicketModel(3L, date1, 3, 3, 30.0, null);
-        TicketModel ticket4 = new TicketModel(4L, date1, 4, 4, 40.0, null);
+        TicketModel ticket1 = new TicketModel(1L, date1, 1, 1, 10.0, null, null);
+        TicketModel ticket2 = new TicketModel(2L, date1, 2, 2, 20.0, null, null);
+        TicketModel ticket3 = new TicketModel(3L, date1, 3, 3, 30.0, null, null);
+        TicketModel ticket4 = new TicketModel(4L, date1, 4, 4, 40.0, null, null);
 
         Set<TicketModel> tickets1 = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(ticket1, ticket2)));
         Set<TicketModel> tickets2 = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(ticket3)));

@@ -12,13 +12,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-public class TicketModel {
+public class EventModel {
     private Long id;
-    private LocalDateTime boughtAt;
-    private int tier;
-    private int seat;
-    private double price;
-
-    private Set<UserModel> users;
-    private Set<EventModel> events;
+    private String title;
+    private LocalDateTime createdAt;
+    private LocalDateTime occurredAt;
+    private PlaceModel placeModel;
+    private Set<TicketModel> tickets;
 }

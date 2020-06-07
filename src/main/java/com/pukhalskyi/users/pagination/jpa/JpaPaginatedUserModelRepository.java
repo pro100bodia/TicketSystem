@@ -16,14 +16,14 @@ import java.util.stream.Collectors;
 @Repository
 public class JpaPaginatedUserModelRepository implements UserRepository {
     private final PaginatedUserEntityRepository paginatedUserEntityRepository;
-    private final ModelMapper modelMapper;
+    private final ModelMapper userModelMapper;
     private int page, size;
 
     @Autowired
     public JpaPaginatedUserModelRepository(PaginatedUserEntityRepository paginatedUserEntityRepository,
-                                           ModelMapper modelMapper) {
+                                           ModelMapper userModelMapper) {
         this.paginatedUserEntityRepository = paginatedUserEntityRepository;
-        this.modelMapper = modelMapper;
+        this.userModelMapper = userModelMapper;
         this.page = 0;
         this.size = 3;
     }
@@ -43,7 +43,7 @@ public class JpaPaginatedUserModelRepository implements UserRepository {
         Page<User> users = paginatedUserEntityRepository.findAll(pageable);
 
         return new PageImpl<>(users.stream()
-                .map(user -> modelMapper.map(user, UserModel.class))
+                .map(user -> userModelMapper.map(user, UserModel.class))
                 .collect(Collectors.toList()));
     }
 }

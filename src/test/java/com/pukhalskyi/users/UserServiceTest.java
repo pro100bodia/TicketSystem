@@ -45,10 +45,10 @@ public class UserServiceTest {
 
     @BeforeClass
     public static void initUserModels() {
-        TicketModel ticket1 = new TicketModel(1L, date1, 1, 1, 10.0, null);
-        TicketModel ticket2 = new TicketModel(2L, date2, 2, 2, 20.0, null);
-        TicketModel ticket3 = new TicketModel(3L, date3, 3, 3, 30.0, null);
-        TicketModel ticket4 = new TicketModel(4L, date4, 4, 4, 40.0, null);
+        TicketModel ticket1 = new TicketModel(1L, date1, 1, 1, 10.0, null, null);
+        TicketModel ticket2 = new TicketModel(2L, date2, 2, 2, 20.0, null, null);
+        TicketModel ticket3 = new TicketModel(3L, date3, 3, 3, 30.0, null, null);
+        TicketModel ticket4 = new TicketModel(4L, date4, 4, 4, 40.0, null, null);
 
         Set<TicketModel> tickets1 = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(ticket1, ticket2)));
         Set<TicketModel> tickets2 = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(ticket3)));

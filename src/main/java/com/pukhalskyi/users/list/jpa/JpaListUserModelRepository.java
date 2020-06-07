@@ -12,18 +12,18 @@ import java.util.stream.Collectors;
 @Repository
 public class JpaListUserModelRepository implements UserRepository {
     private final UserEntityRepository userEntityRepository;
-    private final ModelMapper modelMapper;
+    private final ModelMapper ueserModelMapper;
 
-    public JpaListUserModelRepository(UserEntityRepository userEntityRepository, ModelMapper modelMapper) {
+    public JpaListUserModelRepository(UserEntityRepository userEntityRepository, ModelMapper ueserModelMapper) {
         this.userEntityRepository = userEntityRepository;
-        this.modelMapper = modelMapper;
+        this.ueserModelMapper = ueserModelMapper;
     }
 
     public List<UserModel> findAll() {
         List<User> users = userEntityRepository.findAll();
 
         return users.stream()
-                .map(user -> modelMapper.map(user, UserModel.class))
+                .map(user -> ueserModelMapper.map(user, UserModel.class))
                 .collect(Collectors.toList());
     }
 }

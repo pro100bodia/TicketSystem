@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MapperConfig {
     @Bean
-    public ModelMapper modelMapper() {
+    public ModelMapper userModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
 
         TypeMap<Ticket, TicketModel> typeMap = modelMapper.getTypeMap(Ticket.class, TicketModel.class);

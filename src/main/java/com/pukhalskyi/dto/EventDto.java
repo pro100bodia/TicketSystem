@@ -1,5 +1,6 @@
 package com.pukhalskyi.dto;
 
+import com.pukhalskyi.model.TicketModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,13 +13,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-public class TicketDto {
+public class EventDto {
     private Long id;
-    private LocalDateTime boughtAt;
-    private int tier;
-    private int seat;
-    private double price;
-
-    private Set<UserDto> users;
-    private Set<EventDto> events;
+    private String title;
+    private LocalDateTime createdAt;
+    private LocalDateTime occurredAt;
+    private PlaceDto placeModel;
+    private Set<TicketModel> tickets;
 }

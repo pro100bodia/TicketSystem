@@ -16,11 +16,11 @@ import java.lang.reflect.Type;
 @RequestMapping("/*/api/users")
 public class UserController {
     private final UserService userService;
-    private final ModelMapper modelMapper;
+    private final ModelMapper userModelMapper;
 
-    public UserController(UserService userService, ModelMapper modelMapper) {
+    public UserController(UserService userService, ModelMapper userModelMapper) {
         this.userService = userService;
-        this.modelMapper = modelMapper;
+        this.userModelMapper = userModelMapper;
     }
 
     @GetMapping
@@ -28,7 +28,7 @@ public class UserController {
         Iterable<UserModel> userModels = userService.findAll();
         Type targetIterableType = new TypeToken<Iterable<UserDto>>() {
         }.getType();
-        Iterable<UserDto> userDtos = modelMapper.map(userModels, targetIterableType);
+        Iterable<UserDto> userDtos = userModelMapper.map(userModels, targetIterableType);
 
         return new ResponseEntity<>(userDtos, HttpStatus.OK);
     }
