@@ -23,6 +23,14 @@ import java.util.Set;
 @Getter
 @Setter
 public class Ticket {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime boughtAt;
+    private int tier;
+    private int seat;
+    private double price;
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
@@ -33,12 +41,4 @@ public class Ticket {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> users;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime boughtAt;
-    private int tier;
-    private int seat;
-    private double price;
 }

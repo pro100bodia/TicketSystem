@@ -1,8 +1,5 @@
 package com.pukhalskyi.users;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public class UserService<T extends Iterable> {
     private final UserRepository userRepository;
 

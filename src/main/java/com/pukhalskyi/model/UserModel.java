@@ -1,5 +1,6 @@
 package com.pukhalskyi.model;
 
+import com.pukhalskyi.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +20,6 @@ public class UserModel {
     private String firstName;
     private String lastName;
     private String email;
+    private Role role;
     private Set<TicketModel> tickets;
 }

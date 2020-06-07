@@ -1,5 +1,6 @@
 package com.pukhalskyi.dto;
 
+import com.pukhalskyi.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,6 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String email;
+    private Role role;
     private Set<TicketDto> tickets;
 }
