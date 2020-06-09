@@ -18,6 +18,6 @@ public class EventDto {
     private String title;
     private LocalDateTime createdAt;
     private LocalDateTime occurredAt;
-    private PlaceDto placeModel;
+    private PlaceDto place;
     private Set<TicketModel> tickets;
 }

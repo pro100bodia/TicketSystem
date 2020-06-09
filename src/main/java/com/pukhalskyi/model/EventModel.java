@@ -17,6 +17,6 @@ public class EventModel {
     private String title;
     private LocalDateTime createdAt;
     private LocalDateTime occurredAt;
-    private PlaceModel placeModel;
+    private PlaceModel place;
     private Set<TicketModel> tickets;
 }
