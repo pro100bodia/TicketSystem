@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -107,5 +108,42 @@ public class JpaPaginatedUserModelRepositoryTest {
         assertThat(userModels).isEqualTo(result);
     }
 
+    @Test
+    public void givenNickname_whenFindByNickname_thenReturnUserModel() {
+        //given
+        String nickname = "johndou";
 
+        //when
+        when(paginatedUserEntityRepository.findByNickname(nickname)).thenReturn(users.getContent().get(2));
+        when(modelMapper.map(users.getContent().get(2), UserModel.class)).thenReturn(userModels.getContent().get(2));
+        UserModel result = subject.findByNickname(nickname);
+
+        //then
+        assertThat(userModels.getContent().get(2)).isEqualTo(result);
+    }
+
+    @Test
+    public void givenUserModel_whenAddUser_thenVerifyUserIsSaved() {
+        //given
+        UserModel userModel = userModels.getContent().get(2);
+
+        //when
+        when(modelMapper.map(userModel, User.class)).thenReturn(users.getContent().get(2));
+        subject.addUser(userModel);
+
+        //then
+        verify(paginatedUserEntityRepository).save(users.getContent().get(2));
+    }
+
+    @Test
+    public void givenUserId_whenDeleteUser_thenVerifyUserIsDeleted() {
+        //given
+        Long userId = 1L;
+
+        //when
+        subject.deleteUser(userId);
+
+        //then
+        verify(paginatedUserEntityRepository).deleteById(userId);
+    }
 }

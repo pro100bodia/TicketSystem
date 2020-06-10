@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
@@ -112,5 +113,43 @@ public class UserControllerTest {
         assertThat(userDtos).isEqualTo(result.getBody());
     }
 
+    @Test
+    public void givenUserNickname_whenFindByName_thenReturnUserDto() {
+        //given
+        String nickname = "johndou";
 
+        //when
+        when(userService.findByName(nickname)).thenReturn(userModels.get(2));
+        when(modelMapper.map(userModels.get(2), UserDto.class)).thenReturn(userDtos.get(2));
+
+        ResponseEntity<UserDto> result = subject.findByName(nickname);
+
+        //then
+        assertThat(userDtos.get(2)).isEqualTo(result.getBody());
+    }
+
+    @Test
+    public void givenUserDto_whenAddUser_thenVerifyUserIsAdded() {
+        //given
+        UserDto userDto = userDtos.get(2);
+
+        //when
+        when(modelMapper.map(userDto, UserModel.class)).thenReturn(userModels.get(2));
+        subject.addUser(userDto);
+
+        //then
+        verify(userService).addUser(userModels.get(2));
+    }
+
+    @Test
+    public void givenUserId_whenDeleteUser_thenVerifyUserIsDeleted() {
+        //given
+        Long userId = 1L;
+
+        //when
+        subject.deleteUser(userId);
+
+        //then
+        verify(userService).deleteUser(userId);
+    }
 }

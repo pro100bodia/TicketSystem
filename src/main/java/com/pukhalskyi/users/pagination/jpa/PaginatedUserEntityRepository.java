@@ -9,4 +9,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PaginatedUserEntityRepository extends PagingAndSortingRepository<User, Integer> {
     Page<User> findAll(Pageable pageable);
+
+    User findByNickname(String nickname);
+
+    User save(User user);
+
+    void deleteById(Long integer);
 }

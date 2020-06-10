@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface UserEntityRepository extends JpaRepository<User, Long> {
     List<User> findAll();
+
+    User findByNickname(String nickname);
 }

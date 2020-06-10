@@ -5,7 +5,6 @@ import com.pukhalskyi.entity.User;
 import com.pukhalskyi.model.TicketModel;
 import com.pukhalskyi.model.UserModel;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,6 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -63,7 +63,6 @@ public class UserServiceTest {
         userModels = Arrays.asList(user1, user2, user3);
     }
 
-    @Ignore
     @Test
     public void givenNoArgs_whenFindAll_thenReturnAllUsers() {
 //        given
@@ -74,5 +73,42 @@ public class UserServiceTest {
 
 //        then
         assertThat(userModels).isEqualTo(result);
+    }
+
+    @Test
+    public void givenNickname_whenFindByName_thenReturnUserModel() {
+        //given
+        String nickname = "johndou";
+
+        //when
+        when(userRepository.findByNickname("johndou")).thenReturn(userModels.get(2));
+        UserModel result = subject.findByName(nickname);
+
+        //then
+        assertThat(userModels.get(2)).isEqualTo(result);
+    }
+
+    @Test
+    public void givenUserModel_whenAddUser_thenVerifyUserIsAdded() {
+        //given
+        UserModel userModel = userModels.get(2);
+
+        //when
+        subject.addUser(userModel);
+
+        //then
+        verify(userRepository).addUser(userModel);
+    }
+
+    @Test
+    public void givenUserId_whenDeleteUser_thenVerifyUserIsDeleted() {
+        //given
+        Long userId = 1L;
+
+        //when
+        subject.deleteUser(userId);
+
+        //then
+        verify(userRepository).deleteUser(userId);
     }
 }

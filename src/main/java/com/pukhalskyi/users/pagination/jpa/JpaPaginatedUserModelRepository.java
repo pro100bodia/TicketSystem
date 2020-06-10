@@ -46,4 +46,19 @@ public class JpaPaginatedUserModelRepository implements UserRepository {
                 .map(user -> userModelMapper.map(user, UserModel.class))
                 .collect(Collectors.toList()));
     }
+
+    @Override
+    public UserModel findByNickname(String nickname) {
+        return userModelMapper.map(paginatedUserEntityRepository.findByNickname(nickname), UserModel.class);
+    }
+
+    @Override
+    public void addUser(UserModel userModel) {
+        paginatedUserEntityRepository.save(userModelMapper.map(userModel, User.class));
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        paginatedUserEntityRepository.deleteById(id);
+    }
 }
