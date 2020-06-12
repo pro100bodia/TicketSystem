@@ -122,7 +122,7 @@ public class UserControllerTest {
         when(userService.findByName(nickname)).thenReturn(userModels.get(2));
         when(modelMapper.map(userModels.get(2), UserDto.class)).thenReturn(userDtos.get(2));
 
-        ResponseEntity<UserDto> result = subject.findByName(nickname);
+        ResponseEntity<UserDto> result = subject.findByNickname(nickname);
 
         //then
         assertThat(userDtos.get(2)).isEqualTo(result.getBody());
