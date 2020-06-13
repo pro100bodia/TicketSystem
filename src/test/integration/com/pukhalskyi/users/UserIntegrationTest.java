@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -33,7 +34,7 @@ public class UserIntegrationTest {
 
 
     @Test
-//    @WithMockUser(username = "admin", password = "admin", roles = {"ADMIN"})
+    @WithMockUser(username = "admin", password = "admin", roles = {"ADMIN"})
     public void givenAllUsersRequest_whenFindAll_thenStatus200() throws Exception {
         mvcMock.perform(get("/v2/api/users/?page=0&size=6")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -43,7 +44,7 @@ public class UserIntegrationTest {
     }
 
     @Test
-//    @WithMockUser(username = "admin", password = "admin", roles = {"ADMIN"})
+    @WithMockUser(username = "user", password = "user", roles = {"USER"})
     public void givenUsername_whenGetUserByUsername_thenStatus200() throws Exception {
         mvcMock.perform(get("/v1/api/users/test-bohdanpukhalskyi")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -53,7 +54,7 @@ public class UserIntegrationTest {
     }
 
     @Test
-//    @WithMockUser(username = "admin", password = "admin", roles = {"ADMIN"})
+    @WithMockUser(username = "user", password = "user", roles = {"USER"})
     public void givenUserDto_whenSaveUser_thenStatus200() throws Exception {
         UserDto userDto = new UserDto(4L, "bohdanpukhalskyi", "1111", "Bohdan",
                 "Pukhalskyi", "bohdanpukhalskyi@gmail.com", Role.ROLE_ADMIN, null);
@@ -69,7 +70,7 @@ public class UserIntegrationTest {
     }
 
     @Test
-//    @WithMockUser(username = "admin", password = "admin", roles = {"ADMIN"})
+    @WithMockUser(username = "admin", password = "admin", roles = {"ADMIN"})
     public void givenUsername_whenDeleteUser_thenStatus200() throws Exception {
         mvcMock.perform(delete("/v1/api/users/1")
                 .contentType(MediaType.APPLICATION_JSON))
