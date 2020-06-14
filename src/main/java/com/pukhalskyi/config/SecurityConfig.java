@@ -18,6 +18,7 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String USER_URL = "/*/api/users/**";
+    private static final String TICKET_URL = "/*/api/tickets/**";
     private static final String ROLE_ADMIN = "ADMIN";
 //    private static final String ROLE_CASHIER = "CASHIER";
 
@@ -48,6 +49,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, USER_URL).hasAnyRole(ROLE_ADMIN)
                 .antMatchers(HttpMethod.POST, USER_URL).permitAll()
                 .antMatchers(HttpMethod.DELETE, USER_URL).hasRole(ROLE_ADMIN)
+                .antMatchers(HttpMethod.GET, TICKET_URL).permitAll()
+                .antMatchers(HttpMethod.POST, TICKET_URL).hasRole(ROLE_ADMIN)
+                .antMatchers(HttpMethod.DELETE, TICKET_URL).hasRole(ROLE_ADMIN)
                 .and()
                 .csrf().disable()
                 .formLogin().disable();

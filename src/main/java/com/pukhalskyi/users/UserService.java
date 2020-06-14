@@ -3,9 +3,9 @@ package com.pukhalskyi.users;
 import com.pukhalskyi.model.UserModel;
 
 public class UserService<T extends Iterable> {
-    private final UserRepository userRepository;
+    private final com.pukhalskyi.users.UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(com.pukhalskyi.users.UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
