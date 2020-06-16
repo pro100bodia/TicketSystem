@@ -20,10 +20,10 @@ INSERT INTO place(title, country, state, city, street, building, places_num) VAL
   ('test-NAU Stadium', 'Ukraine', 'Kyivska', 'Kyiv', 'Liubomyra Huzara Ave.', '1', 100);
 
 INSERT INTO event(title, created_at, occurred_at, place_id) VALUES
-  ('test-motoball: Podillia - Zoria', '2020-05-30', '2020-07-15', 3),
-  ('test-motoball: Podillia - Voshod', '2020-05-30', '2020-07-18', 3),
-  ('test-alyona-alyona grand tour', '2020-05-30', '2020-08-24', 2),
-  ('test-basketball: Kyiv-Basket - Cherkaski-Mavpy', '2020-05-30', '2020-07-23', 4);
+  ('test-motoball: Podillia - Zoria', '2020-05-30T17:00:00', '2020-07-15T17:00:00', 3),
+  ('test-motoball: Podillia - Voshod', '2020-05-30T17:00:00', '2020-07-18T17:00:00', 3),
+  ('test-alyona-alyona grand tour', '2020-05-30T17:00:00', '2020-08-24T17:00:00', 2),
+  ('test-basketball: Kyiv-Basket - Cherkaski-Mavpy', '2020-05-30T17:00:00', '2020-07-23T17:00:00', 4);
 
 INSERT INTO ticket_user (user_id, ticket_id) VALUES
   (1, 1),

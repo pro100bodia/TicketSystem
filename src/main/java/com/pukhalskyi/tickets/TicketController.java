@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/*/api/tickets")
@@ -30,6 +32,43 @@ public class TicketController {
     @GetMapping()
     public ResponseEntity<?> findAll() {
         Iterable<TicketModel> ticketModels = ticketService.findAll();
+
+        Type targetIterableType = new TypeToken<Iterable<TicketDto>>() {
+        }.getType();
+        Iterable<TicketDto> ticketDtos = ticketModelMapper.map(ticketModels, targetIterableType);
+
+        return new ResponseEntity<>(ticketDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/place/{title}")
+    public ResponseEntity<?> findByPlace(@PathVariable String title) {
+        Iterable<TicketModel> ticketModels = ticketService.findByPlace(title);
+
+        Type targetIterableType = new TypeToken<Iterable<TicketDto>>() {
+        }.getType();
+        Iterable<TicketDto> ticketDtos = ticketModelMapper.map(ticketModels, targetIterableType);
+
+        return new ResponseEntity<>(ticketDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/event/{title}")
+    public ResponseEntity<?> findByEvent(@PathVariable String title) {
+        Iterable<TicketModel> ticketModels = ticketService.findByEvent(title);
+
+        Type targetIterableType = new TypeToken<Iterable<TicketDto>>() {
+        }.getType();
+        Iterable<TicketDto> ticketDtos = ticketModelMapper.map(ticketModels, targetIterableType);
+
+        return new ResponseEntity<>(ticketDtos, HttpStatus.OK);
+    }
+
+    @GetMapping("/date/from/{from}/to/{to}")
+    public ResponseEntity<?> findByDateRange(@PathVariable String from, @PathVariable String to) {
+        LocalDateTime fromDateTime = LocalDateTime.parse(from, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        LocalDateTime toDateTime = LocalDateTime.parse(to, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+
+        Iterable<TicketModel> ticketModels = ticketService.findByDateRange(fromDateTime, toDateTime);
+
         Type targetIterableType = new TypeToken<Iterable<TicketDto>>() {
         }.getType();
         Iterable<TicketDto> ticketDtos = ticketModelMapper.map(ticketModels, targetIterableType);

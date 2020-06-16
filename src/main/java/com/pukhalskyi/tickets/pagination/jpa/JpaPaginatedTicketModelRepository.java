@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 @Repository
@@ -41,6 +42,39 @@ public class JpaPaginatedTicketModelRepository implements TicketRepository {
         Pageable pageable = PageRequest.of(page, size);
 
         Page<Ticket> tickets = paginatedTicketEntityRepository.findAll(pageable);
+
+        return new PageImpl<>(tickets.stream()
+                .map(ticket -> ticketModelMapper.map(ticket, TicketModel.class))
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    public Page<TicketModel> findByPlace(String title) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<Ticket> tickets = paginatedTicketEntityRepository.findByPlacesTitle(title, pageable);
+
+        return new PageImpl<>(tickets.stream()
+                .map(ticket -> ticketModelMapper.map(ticket, TicketModel.class))
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    public Page<TicketModel> findByEvent(String title) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<Ticket> tickets = paginatedTicketEntityRepository.findByEventsTitle(title, pageable);
+
+        return new PageImpl<>(tickets.stream()
+                .map(ticket -> ticketModelMapper.map(ticket, TicketModel.class))
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    public Page<TicketModel> findByDateRange(LocalDateTime from, LocalDateTime to) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        Page<Ticket> tickets = paginatedTicketEntityRepository.findByEventsOccurredAtBetween(from, to, pageable);
 
         return new PageImpl<>(tickets.stream()
                 .map(ticket -> ticketModelMapper.map(ticket, TicketModel.class))

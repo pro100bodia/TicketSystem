@@ -38,6 +38,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Sql({"/test-schema.sql", "/test-data.sql"})
 public class TicketIntegrationTest {
+    public static final String TICKETS_V1_URL = "/v1/api/tickets";
 
     @Autowired
     private MockMvc mvcMock;
@@ -66,7 +67,7 @@ public class TicketIntegrationTest {
 
         String requestBody = gson.toJson(ticketDto);
 
-        mvcMock.perform(post("/v1/api/tickets")
+        mvcMock.perform(post(TICKETS_V1_URL)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody))
                 .andExpect(status().isOk());
@@ -75,9 +76,33 @@ public class TicketIntegrationTest {
     @Test
     @WithMockUser(username = "admin", password = "admin", roles = {"ADMIN"})
     public void givenUsername_whenDeleteTicket_thenStatus200() throws Exception {
-        mvcMock.perform(delete("/v1/api/tickets/1")
+        mvcMock.perform(delete(TICKETS_V1_URL + "/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "user", roles = {"USER"})
+    public void givenEventTitle_whenFindByEvent_thenStatus200() throws Exception {
+        mvcMock.perform(get(TICKETS_V1_URL + "/event/test-motoball: Podillia - Zoria")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "user", roles = {"USER"})
+    public void givenFromAndToDateTimes_whenFindByDateRange_thenStatus200() throws Exception {
+        mvcMock.perform(get(TICKETS_V1_URL + "/date/from/2020-05-15T00:00:00/to/2020-05-18T23:59:59")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void givenPlaceTitle_whenFindByPlace_thenStatus200() throws Exception {
+        mvcMock.perform(get(TICKETS_V1_URL + "/place/test-Motoball Stadium")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value("1"));
     }
 
     class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime> {
@@ -86,4 +111,6 @@ public class TicketIntegrationTest {
             return new JsonPrimitive(dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         }
     }
+
+
 }
