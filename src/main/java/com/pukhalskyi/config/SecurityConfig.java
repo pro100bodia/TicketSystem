@@ -20,7 +20,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String USER_URL = "/*/api/users/**";
     private static final String TICKET_URL = "/*/api/tickets/**";
     private static final String ROLE_ADMIN = "ADMIN";
-//    private static final String ROLE_CASHIER = "CASHIER";
 
     @Autowired
     private DataSource dataSource;
@@ -38,8 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-
         http
                 .httpBasic()
                 .and()
